@@ -5,9 +5,13 @@ import calc
 #messagebox.showwarning(title="", message="")
 
 class Gui:
-    font_size = 20
-    font_style = "Arial"
+    font_size: int = 20
+    font_style: str = "Arial"
     def __init__(self, window):
+        """
+        function to initialize tkinter gui
+        :param window: creates an instance of the tkinter window
+        """
         self.window = window
         self.frame_one = Frame(self.window)
         self.calculation_label = Label(self.frame_one, font = f'{self.font_style} {self.font_size}', width=100, height=3, text = '', borderwidth=1, relief="solid")
@@ -121,15 +125,25 @@ class Gui:
 
 
 
-    def update_string(self, val, num):
+    def update_string(self, index: int, num: int):
+        """
+        function to update the string displayed at the top of the calculator
+        :param index: index of function in list
+        :param num: numerical value to
+        :return: None
+        """
         self.funcs = [calc.set_num, calc.ac, calc.plus_minus, calc.percent, calc.divide, calc.multiply, calc.subtract, calc.add, calc.decimal, calc.equals]
-        if val == 0:
-            self.funcs[val](num)
+        if index == 0:
+            self.funcs[index](num)
         else:
-            self.funcs[val]()
+            self.funcs[index]()
         self.calculation_label.config(text=calc.get_str())
 
     def shape(self):
+        """
+        function to detect shape option and show appropriate inputs
+        :return: None
+        """
         val = self.shape_val.get()
         if val == 0:
             self.base_label.config(text = 'Side')
@@ -170,6 +184,10 @@ class Gui:
         self.result.pack_forget()
 
     def area_calc(self):
+        """
+        function to calculate area of chosen shape based on entry values
+        :return: None
+        """
         val = self.shape_val.get()
 
         if val == 0:
@@ -197,12 +215,21 @@ class Gui:
             self.result.pack(side='left')
 
     def tip_calc(self):
+        """
+        function to calculate and show tip value
+        :return: None
+        """
         total = self.try_float(self.total_entry.get())
         tip_percent = self.try_float(self.tip_percent.get())
         calculated_tip = calc.tip(total,tip_percent)
-        self.tip.config(text = f"Tip: ${calculated_tip} | Total: ${float(total)+calculated_tip}")
+        self.tip.config(text = f"Tip: ${calculated_tip:.2f} | Total: ${float(total)+calculated_tip:.2f}")
         self.tip.pack(side = 'left')
     def try_float(self, val):
+        """
+        function to check if entry value can be converted to float
+        :param val: value to verify
+        :return: value as float (or -1 if not possible)
+        """
         try:
             float(val)
 

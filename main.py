@@ -4,7 +4,7 @@ from gui import *
 def main():
     window = Tk()
     window.title('Calculator')
-    window.geometry('750x500')#('300x375')#
+    window.geometry('800x500')#('300x375')#
     window.resizable(False, False)
 
     Gui(window)
