@@ -40,7 +40,7 @@ def ac():
     global if_first_num
     global has_symbol
     global calculation_done
-    if_first_num: = True
+    if_first_num = True
     strin = ""
     num_one_str = ""
     num_two_str = ""
